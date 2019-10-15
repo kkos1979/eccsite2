@@ -17,16 +17,20 @@
     <form action="/cart/buy" method="post">
       @csrf
       <p>
-        お名前：<br>
+        お名前(必須)：<br>
         <input type="text" name="name" value="{{ old('name') ?? \Auth::user()->name ?? '' }}">
       </p>
       <p>
-        ご住所：<br>
+        ご住所(必須)：<br>
         <input type="text" name="address" size="60" value="{{ old('address') ?? \Auth::user()->address ?? ''}}">
       </p>
       <p>
-        電話番号：<br>
+        電話番号(必須)：<br>
         <input type="text" name="tel" value="{{ old('tel') ?? \Auth::user()->tel ?? ''}}">
+      </p>
+      <p>
+        メールアドレス：<br>
+        <input type="text" name="email" value="{{ old('email') ?? \Auth::user()->email ?? ''}}">
       </p>
       <p>
         <input type="submit" value="購入">

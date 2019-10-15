@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //DBファサードの使用
+use App\Mail\OrderShipped; // 
 use App\Rules\Tel; // カスタムバリデーションルールTelを使用。
 use Gate; // Gateを使用
+use Illuminate\Support\Facades\Mail; // Mailファサードの使用
 
 class StatusController extends Controller
 {
@@ -100,6 +102,15 @@ class StatusController extends Controller
         'tel' => ['required', new Tel],
       ];
       $this->validate($request, $rules);
+
+      // メールアドレスが入力されている場合バリデート
+      if (isset($request->email)) {
+        $rules = [
+          'email' => ['email'],
+        ];
+        $this->validate($request, $rules);
+      }
+
       //セッションから商品情報を取得
       $cart = $request->session()->get('cart');
       $rows = [];
@@ -115,6 +126,11 @@ class StatusController extends Controller
           $sum += $num * $row->price;
           $rows[] = $row;
         }
+      }
+
+      if (isset($request->email)) {
+        $mail_to = $request->email;
+        Mail::to($mail_to)->send(new OrderShipped($request, $rows, $sum));
       }
 
       // セッションcartを空にする。
