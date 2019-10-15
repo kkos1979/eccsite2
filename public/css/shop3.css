@@ -1,0 +1,29 @@
+body {
+  font-size: 14px;
+  font-family: Verdana, sans-serif;
+}
+
+.container {
+  width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  padding-bottom: 20px;
+}
+
+.base {
+  background: orange;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+table {
+  width: 770px;
+  margin: 15px auto;
+  padding: 20px 0 20px 0;
+  background: orange;
+  border-collapse: collapse;
+}

@@ -22,31 +22,35 @@ Route::get('cart/buy', function(){
 });
 Route::post('cart/buy', 'StatusController@buyComplete');
 
-//通常の認証
-Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
-Route::post('auth/register', 'Auth\RegisterController@register');
+//ユーザーの登録・認証（prefix、namespace使用）
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
+  Route::get('register', 'RegisterController@showRegistrationForm');
+  Route::post('register', 'RegisterController@register');
 
-Route::get('auth/login', 'Auth\LoginController@showLoginForm');
-Route::post('auth/login', 'Auth\LoginController@login');
+  Route::get('login', 'LoginController@showLoginForm');
+  Route::post('login', 'LoginController@login');
 
-Route::get('auth/logout', 'Auth\LoginController@logout');
+  Route::get('logout', 'LoginController@logout');
+});
 
 // 管理者用ルート
-// 商品内容の編集
-Route::get('/edit/{id}', 'Admin\AdminController@editGet');
-Route::post('/edit/{id}', 'Admin\AdminController@editPost');
-// 画像の追加
-Route::get('/upload/{id}/{name}', 'Admin\AdminController@uploadGet');
-Route::post('/upload/{id}/upload', 'Admin\AdminController@uploadPost');
-// 商品の削除
-Route::delete('/destroy/{id}', 'Admin\AdminController@destroy');
-// 商品の新規追加
-Route::get('/create', 'Admin\AdminController@create');
-Route::post('/create', 'Admin\AdminController@store');
-// サイトの確認
-Route::get('admin', 'Admin\AdminController@confirmIndex');
-
 //管理者のみアクセス制限
-Route::group(['middleware' => 'admin_auth'], function() {
-  Route::get('/admin/home', 'Admin\AdminController@index');
+Route::group(['namespace' => 'Admin', 'middleware' => 'admin_auth'], function() {
+  // 管理者用ホーム
+  Route::get('/admin/home', 'AdminController@index');
+
+  // 商品内容の編集
+  Route::get('/edit/{id}', 'AdminController@editGet');
+  Route::post('/edit/{id}', 'AdminController@editPost');
+  // 画像の追加
+  Route::get('/upload/{id}/{name}', 'AdminController@uploadGet');
+  Route::post('/upload/{id}/upload', 'AdminController@uploadPost');
+  // 商品の削除
+  Route::delete('/destroy/{id}', 'AdminController@destroy');
+  // 商品の新規追加
+  Route::get('/create', 'AdminController@create');
+  Route::post('/create', 'AdminController@store');
+  // サイトの確認
+  Route::get('admin', 'AdminController@confirmIndex');
+
 });

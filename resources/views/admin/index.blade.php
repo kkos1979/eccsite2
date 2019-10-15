@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>商品一覧 | 管理ページ</title>
-  <link rel="stylesheet" href="/css/shop.css">
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', '商品一覧 | 管理ページ')
+
+@section('content')
   <h1>商品一覧 | 管理ページ</h1>
   <table>
     @foreach ($goods as $g)
@@ -19,7 +14,7 @@
           <p class="goods">{{ $g->name }}</p>
           <p>{{ $g->comment }}</p>
         </td>
-        <td width="80">
+        <td width="150">
           <p>{{ $g->price }}円</p>
           <p>在庫 {{ $g->stock }} 個</p>
         </td>

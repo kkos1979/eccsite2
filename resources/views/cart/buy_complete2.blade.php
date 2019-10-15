@@ -1,8 +1,13 @@
-@extends('layouts.app')
-
-@section('title', '購入完了 | Noodle Shop')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>購入完了 | Noodle Shop</title>
+  <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
   <div class="base">
     商品が購入されました。<br>
     ご購入ありがとうございました。<br>
@@ -24,4 +29,5 @@
   <div class="base">
     <a href="/">お買い物に戻る</a>
   </div>
-@endsection
+</body>
+</html>

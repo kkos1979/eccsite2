@@ -1,8 +1,13 @@
-@extends('layouts.app')
-
-@section('title', '商品追加')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>商品追加</title>
+  <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
   <h1>商品追加</h1>
   @if ($errors->any())
     <div class="base">
@@ -38,4 +43,5 @@
   <div class="base">
     <a href="/">一覧に戻る</a>
   </div>
-@endsection
+</body>
+</html>

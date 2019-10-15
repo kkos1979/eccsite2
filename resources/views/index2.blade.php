@@ -1,18 +1,24 @@
-@extends('layouts.app')
-
-@section('title', 'Noodle Shop')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Noodle Shop</title>
+  <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+  <div class="container">
     <h1>Noodle Shop</h1>
     <div class="base">
     @if (Auth::check())
         <p>{{ \Auth::user()->name }}さん、こんにちは。</p>
         <p>
-          <button class="btn btn-primary" type="button" onclick="location.href='/auth/logout'">ログアウト</button>
+          <button class="btn" type="button" onclick="location.href='/auth/logout'">ログアウト</button>
         </p>
     @else
-        <button class="btn btn-primary" type="button" onclick="location.href='/auth/login'">ログイン</button>
-        <button class="btn btn-primary" type="button" onclick="location.href='/auth/register'">新規登録</button>
+        <button class="btn" type="button" onclick="location.href='/auth/login'">ログイン</button>
+        <button class="btn" type="button" onclick="location.href='/auth/register'">新規登録</button>
     @endif
     </div>
     <form action="/cart" method="post">
@@ -27,7 +33,7 @@
               <p class="goods">{{ $g->name }}</p>
               <p>{{ $g->comment }}</p>
             </td>
-            <td width="100">
+            <td width="80">
               <p>{{ $g->price }}円</p>
               <p>在庫 {{ $g->stock }} 個</p>
             </td>
@@ -46,7 +52,9 @@
         @endforeach
       </table>
       <div class="base">
-        <input class="btn btn-primary" type="submit" value="カートへ">
+        <input type="submit" value="カートへ">
       </div>
     </form>
-@endsection
+  </div>
+</body>
+</html>

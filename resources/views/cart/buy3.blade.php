@@ -1,8 +1,13 @@
-@extends('layouts.app')
-
-@section('title', '購入 | Noodle Shop')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>購入 | Noodle Shop</title>
+  <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
   <h1>購入</h1>
   <div class="base">
     <p>商品のご送付先を入力してください。</p>
@@ -37,7 +42,9 @@
     <a href="/">お買い物に戻る</a>
     <a href="/cart">カートに戻る</a>
     @if (!Auth::check())
-      <button class="btn btn-primary" type="button" onclick="location.href='/auth/login'">ログイン</button>
+      <button class="btn" type="button" onclick="location.href='/auth/login'">ログイン</button>
     @endif
   </div>
-@endsection
+</body>
+</script>
+</html>

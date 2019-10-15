@@ -11,7 +11,7 @@ class StatusController extends Controller
 {
     public function index() {
       $goods = DB::table('goods')->get();
-      // 管理者でログインしたら管理者のホームへリダイレクト
+      // 管理者でログインしたら管理者ホームへリダイレクト
       if (Gate::allows('isAdmin')) {
         return redirect()->action('Admin\AdminController@index');
       } else {
@@ -63,6 +63,7 @@ class StatusController extends Controller
 
     public function cartGet(Request $request) {
 
+      $rows = [];
       $sum = 0;
       $errors_over = [];
 
@@ -105,8 +106,11 @@ class StatusController extends Controller
       $sum = 0;
 
       foreach ($cart as $id => $num) {
-        $row = DB::table('goods')->where('id', '=', $id)->first();
+        $row = DB::table('goods')->where('id', $id)->first();
         if ($num !== 0) {
+          // 商品在庫の減少
+          DB::table('goods')->where('id', $id)->decrement('stock', $num);
+
           $row->num = $num;
           $sum += $num * $row->price;
           $rows[] = $row;
