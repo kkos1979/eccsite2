@@ -4,20 +4,19 @@
 
 @section('content')
     <h1>Noodle Shop</h1>
-    <div class="base">
+    <div class="header">
     @if (Auth::check())
-        <p>{{ \Auth::user()->name }}さん、こんにちは。</p>
-        <p>
-          <button class="btn btn-primary" type="button" onclick="location.href='/auth/logout'">ログアウト</button>
+        <p style="line-height: 46px;">{{ \Auth::user()->name }}さん、こんにちは。
+          <button class="btn btn-primary btn-hf" type="button" onclick="location.href='/auth/logout'">ログアウト</button>
         </p>
     @else
-        <button class="btn btn-primary" type="button" onclick="location.href='/auth/login'">ログイン</button>
-        <button class="btn btn-primary" type="button" onclick="location.href='/auth/register'">新規登録</button>
+        <button class="btn btn-primary btn-hf" type="button" onclick="location.href='/auth/login'">ログイン</button>
+        <button class="btn btn-primary btn-hf" type="button" onclick="location.href='/auth/register'">新規登録</button>
     @endif
     </div>
     <form action="/cart" method="post">
       {{ csrf_field() }}
-      <table>
+      <table class="table">
         @foreach ($goods as $g)
           <tr>
             <td>
@@ -45,8 +44,8 @@
           </tr>
         @endforeach
       </table>
-      <div class="base">
-        <input class="btn btn-primary" type="submit" value="カートへ">
+      <div class="footer">
+        <input class="btn btn-primary btn-hf" type="submit" value="カートへ">
       </div>
     </form>
 @endsection

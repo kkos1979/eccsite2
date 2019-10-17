@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //DBファサードの使用
-use App\Mail\OrderShipped; // 
+use App\Mail\OrderShipped; //
 use App\Rules\Tel; // カスタムバリデーションルールTelを使用。
 use Gate; // Gateを使用
 use Illuminate\Support\Facades\Mail; // Mailファサードの使用
+use App\Http\Requests\AddressPost; // フォームリクエストによるバリデーション
 
 class StatusController extends Controller
 {
@@ -93,15 +94,7 @@ class StatusController extends Controller
       return view('/cart/cart', ['sum' => $sum]);
     }
 
-    public function buyComplete(Request $request) {
-      // バリデート
-      $rules = [
-        'name' => ['required', 'string'],
-        'address' => ['required', 'string'],
-        // カスタムバリデーションルールをインスタンス化して使用
-        'tel' => ['required', new Tel],
-      ];
-      $this->validate($request, $rules);
+    public function buyComplete(AddressPost $request) {
 
       // メールアドレスが入力されている場合バリデート
       if (isset($request->email)) {

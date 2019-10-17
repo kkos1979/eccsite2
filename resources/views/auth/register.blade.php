@@ -8,7 +8,7 @@
       <p>
         {{ $message }}
       </p>
-      <button class="btn" type="button" onclick="location.href='login.php'">ログイン</button>
+      <button class="btn btn-primary" type="button" onclick="location.href='login.php'">ログイン</button>
     </div>
   @else
   <h1>新規登録</h1>

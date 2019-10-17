@@ -67,6 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $now = \Carbon\Carbon::now();
         return User::create([
             'name' => $data['name'],
             'address' => $data['address'],
@@ -74,6 +75,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'role' => 'costomer',
             'password' => Hash::make($data['password']),
+            'created_at' => $now,
+            'updated_at' => $now,
         ]);
     }
 }

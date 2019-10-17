@@ -59,6 +59,19 @@ th, td {
   font-weight: bold;
 }
 
+.header,
+.footer {
+  margin: 0 auto;
+  text-align: center;
+  height: 46px;
+  background: #eee;
+}
+
+.btn-hf {
+  margin-right: 8px;
+  float: right;
+}
+
 .base {
   width: 480px;
   margin: 15px auto;

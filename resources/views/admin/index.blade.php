@@ -29,7 +29,7 @@
             <form action="/destroy/{{ $g->id }}" id="form_{{$g->id}}" method="post">
               {{ csrf_field() }}
               {{ method_field('delete') }}
-              <a href="#" data-id="{{ $g->id }}" class="btn" onclick="deleteGoods(this);">削除</a>
+              <a href="#" data-id="{{ $g->id }}" class="btn btn-primary" onclick="deleteGoods(this);">削除</a>
             </form>
           </p>
         </td>
@@ -39,7 +39,7 @@
   <div class="base">
     <a href="/create">新規追加</a>
     <a href="/admin" target="blank">サイト確認</a>
-      <button class="btn" type="button" onclick="location.href='/auth/logout'">ログアウト</butt
+      <button class="btn btn-primary" type="button" onclick="location.href='/auth/logout'">ログアウト</button>
   </div>
 </body>
 <script type="text/javascript">

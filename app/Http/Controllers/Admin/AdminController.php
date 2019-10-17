@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB; //DBファサードの使用
 use Illuminate\Http\Request;
+use App\Http\Requests\GoodsPost; // フォームリクエストによるバリデーション
 
 class AdminController extends Controller
 {
@@ -23,24 +24,16 @@ class AdminController extends Controller
       return view('/admin/edit', ['g' => $g]);
     }
 
-    public function editPost(Request $request, $id) {
-      // バリデート
-      $rules = [
-        'goods_name' => ['required', 'string'],
-        'comment' => ['required', 'string'],
-        'price' => ['required', 'integer', 'min:1'],
-        'stock' => ['required', 'integer', 'min:1'],
-      ];
-      $this->validate($request, $rules);
+    public function editPost(GoodsPost $request, $id) {
 
       // DBの更新
+      $now = \Carbon\Carbon::now();
       DB::table('goods')->where('id', '=', $id)->update([
         'name' => $request->goods_name,
         'comment' => $request->comment,
-        'image' => 'noimage',
         'price' => $request->price,
         'stock' => $request->stock,
-
+        'updated_at' => $now,
       ]);
       return redirect()->action('Admin\AdminController@index');
     }
@@ -61,8 +54,10 @@ class AdminController extends Controller
       //intervention Imageで加工、public/imagesフォルダへ保存
       $img = \Image::make($pic)->resize(100, 100)->save(public_path() . '/images/' . $id . '.jpg');
       //DBに画像情報を追加
+      $now = \Carbon\Carbon::now();
       DB::table('goods')->where('id', '=', $id)->update([
         'image' => $id,
+        'updated_at' => $now,
       ]);
       // if ($pic->isValid()) {
       //
@@ -79,24 +74,17 @@ class AdminController extends Controller
       return view('admin.create');
     }
 
-    public function store(Request $request) {
-      // バリデート
-      $rules = [
-        'goods_name' => ['required', 'string'],
-        'comment' => ['required', 'string'],
-        'price' => ['required', 'integer', 'min:1'],
-        'stock' => ['required', 'integer', 'min:1'],
-      ];
-      $this->validate($request, $rules);
+    public function store(GoodsPost $request) {
 
       // DBの更新
+      $now = \Carbon\Carbon::now();
       DB::table('goods')->insert([
         'name' => $request->goods_name,
         'comment' => $request->comment,
-        'image' => 'noimage',
         'price' => $request->price,
         'stock' => $request->stock,
-
+        'created_at' => $now,
+        'updated_at' => $now,
       ]);
       return redirect()->action('Admin\AdminController@index');
     }

@@ -22,7 +22,7 @@
       </p>
       <p>
         <input type="submit" value="ログイン">
-        <button class="btn" type="button" onclick="location.href='/auth/register'">新規登録</button>
+        <button class="btn btn-primary" type="button" onclick="location.href='/auth/register'">新規登録</button>
       </p>
     </form>
   </div>

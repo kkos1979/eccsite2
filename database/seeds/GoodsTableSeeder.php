@@ -12,12 +12,15 @@ class GoodsTableSeeder extends Seeder
     public function run()
     {
         //
+        $now = \Carbon\Carbon::now();
+
         DB::table('goods')->insert([
-          'name' => 'そば',
-          'comment' => 'そば粉100％',
+          'name' => 'うどん',
+          'comment' => 'コシのあるうどん',
           'price' => 500,
           'stock' => 10,
-          'image' => '',
+          'created_at' => $now,
+          'updated_at' => $now,
         ]);
     }
 }

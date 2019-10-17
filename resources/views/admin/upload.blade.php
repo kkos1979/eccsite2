@@ -2,7 +2,7 @@
 
 @section('title', '商品画像アップロード')
 
-@section
+@section('content')
   <h1>商品画像アップロード</h1>
   <div class="base">
     @if ($errors->any())
